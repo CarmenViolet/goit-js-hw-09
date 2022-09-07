@@ -1,5 +1,5 @@
 const timer = document.querySelector('#datetime-picker');
-
+console.log('g');
 
 
 
