@@ -18,10 +18,9 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-    milliseconds = selectedDates[0] - new Date();
-      if(selectedDates[0] >= new Date()) {
-        buttonStart.disabled = false;
-      } else {
+    milliseconds = selectedDates[0];
+    
+      if(selectedDates[0] <= new Date()) {
         buttonStart.disabled = true;
         alert('Please choose a date in the future')
       }
@@ -31,6 +30,7 @@ const options = {
 const fp = flatpickr("#datetime-picker", options)
 
 function timerButtonOn() {
+  buttonStart.disabled = true;
     timerId = setInterval(countdownOn, 1000, milliseconds)
 }
 
@@ -38,11 +38,13 @@ function countdownOn() {
     if(milliseconds === 0) {
         clearInterval(timerId);
     }
+    const newDate = new Date().getTime();
+    const deltaTime = milliseconds - newDate;
 
-    days.innerHTML = pad(convertMs(milliseconds).days);
-    hours.innerHTML = pad(convertMs(milliseconds).hours);
-    minutes.innerHTML = pad(convertMs(milliseconds).minutes);
-    seconds.innerHTML = pad(convertMs(milliseconds).seconds);
+    days.innerHTML = pad(convertMs(deltaTime).days);
+    hours.innerHTML = pad(convertMs(deltaTime).hours);
+    minutes.innerHTML = pad(convertMs(deltaTime).minutes);
+    seconds.innerHTML = pad(convertMs(deltaTime).seconds);
 }
 
 function convertMs(ms) {
