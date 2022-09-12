@@ -4,10 +4,12 @@ import "flatpickr/dist/flatpickr.min.css";
 
 const timer = document.querySelector('#datetime-picker');
 const buttonStart = document.querySelector('[data-start]');
-const days = document.querySelector('[data-days]');
-const hours = document.querySelector('[data-hours]');
-const minutes = document.querySelector('[data-minutes]');
-const seconds = document.querySelector('[data-seconds]');
+const refs = {
+ days: document.querySelector('[data-days]'),
+ hours: document.querySelector('[data-hours]'),
+ minutes: document.querySelector('[data-minutes]'),
+ seconds: document.querySelector('[data-seconds]'),
+};
 let timerId = null;
 let milliseconds = 0;
 
@@ -42,10 +44,11 @@ function countdownOn() {
     const newDate = new Date().getTime();
     const deltaTime = milliseconds - newDate;
 
-    days.innerHTML = pad(convertMs(deltaTime).days);
-    hours.innerHTML = pad(convertMs(deltaTime).hours);
-    minutes.innerHTML = pad(convertMs(deltaTime).minutes);
-    seconds.innerHTML = pad(convertMs(deltaTime).seconds);
+    let refs = convertMs(deltaTime);
+
+    for(let key of Object.keys(refs)) {
+      document.querySelector(`[data-${key}]`).textContent = pad(refs[key]);
+    }
 }
 
 function convertMs(ms) {

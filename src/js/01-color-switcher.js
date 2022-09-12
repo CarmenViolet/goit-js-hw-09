@@ -17,6 +17,7 @@ function addRandomColorOn() {
    }, 1000)
 
    buttonStart.disabled = true;
+   buttonStop.disabled = false;
 }
 
 
@@ -24,4 +25,5 @@ function stopRandomColor() {
     clearInterval(timerId);
 
     buttonStart.disabled = false;
+    buttonStop.disabled = true;
 }
