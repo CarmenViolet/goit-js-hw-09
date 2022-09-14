@@ -40,11 +40,11 @@ function timerButtonOn() {
 }
 
 function countdownOn() {
-    if(deltaTime === 0) {
-        clearInterval(timerId);
-    }
-    const newDate = new Date().getTime();
-    const deltaTime = milliseconds - newDate;
+  const newDate = new Date().getTime();
+  const deltaTime = milliseconds - newDate;
+  if(deltaTime === 0) {
+      clearInterval(timerId);
+  }
 
     let refs = convertMs(deltaTime);
 
