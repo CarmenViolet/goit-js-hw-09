@@ -40,7 +40,7 @@ function timerButtonOn() {
 }
 
 function countdownOn() {
-    if(milliseconds === 0) {
+    if(deltaTime === 0) {
         clearInterval(timerId);
     }
     const newDate = new Date().getTime();
