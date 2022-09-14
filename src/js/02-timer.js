@@ -42,15 +42,16 @@ function timerButtonOn() {
 function countdownOn() {
   const newDate = new Date().getTime();
   const deltaTime = milliseconds - newDate;
-  if(deltaTime === 0) {
+  
+  let refs = convertMs(deltaTime);
+  
+  if(deltaTime < 1) {
       clearInterval(timerId);
+      return;
   }
-
-    let refs = convertMs(deltaTime);
-
-    for(let key of Object.keys(refs)) {
-      document.querySelector(`[data-${key}]`).textContent = pad(refs[key]);
-    }
+  for(let key of Object.keys(refs)) {
+    document.querySelector(`[data-${key}]`).textContent = pad(refs[key]);
+  }
 }
 
 function convertMs(ms) {
